@@ -1,5 +1,6 @@
 // 1422. Maximum Score After Splitting a String
 
+#include <string>
 class Solution {
 public:
     int maxScore(string& s) {
