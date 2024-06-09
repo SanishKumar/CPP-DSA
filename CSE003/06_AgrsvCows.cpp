@@ -1,42 +1,52 @@
+#include <iostream>
 #include <vector>
 #include <algorithm>
 
-class Solution {
+using namespace std;
+
+class Solution
+{
 public:
-    bool canPlaceCows(const std::vector<int>& stalls, int n, int k, int mid) {
-        int count = 1;
-        int lastPosition = stalls[0];
-        
-        for (int i = 1; i < n; ++i) {
-            if (stalls[i] - lastPosition >= mid) {
-                count++;
-                lastPosition = stalls[i];
-                if (count == k) {
-                    return true;
-                }
+    bool canCowsBePlaced(int gap, int n, vector<int> &stalls, int k)
+    {
+        int cows = 1;
+        int pos = 0;
+        for (int i = 1; i < n; i++)
+        {
+            if (stalls[i] - stalls[pos] >= gap)
+            {
+                cows++;
+                pos = i;
             }
         }
-        return false;
+        if (cows >= k)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
-
-    int solve(int n, int k, std::vector<int>& stalls) {
-        std::sort(stalls.begin(), stalls.end());
-        
-        int left = 1;
-        int right = stalls[n - 1] - stalls[0];
-        int result = 0;
-
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-
-            if (canPlaceCows(stalls, n, k, mid)) {
-                result = mid;
-                left = mid + 1;
-            } else {
-                right = mid - 1;
+    int solve(int n, int k, vector<int> &stalls)
+    {
+        sort(stalls.begin(), stalls.end());
+        int low = 1;
+        int high = stalls[n - 1] - stalls[0];
+        int maxGap = 0;
+        while (low <= high)
+        {
+            int mid = (low + high) / 2;
+            if (canCowsBePlaced(mid, n, stalls, k) == true)
+            {
+                maxGap = mid;
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
             }
         }
-
-        return result;
+        return maxGap;
     }
 };
