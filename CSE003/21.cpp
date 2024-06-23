@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <vector>
-    using namespace std;
+using namespace std;
 void climbStairs(int n, vector<int> &ans)
 {
     // base case
