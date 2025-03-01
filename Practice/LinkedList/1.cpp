@@ -10,6 +10,15 @@ class Node{
             this->data = data;
             this->next = NULL;
         }
+
+        ~Node(){
+            int value = this -> data;
+            if(this->next != NULL){
+                delete next;
+                this->next = NULL;
+            }
+            cout << "Memory freed for node with data " << value << endl;
+        }
 };
 
 void insertAtHead(Node* &head, int d){
@@ -24,6 +33,10 @@ void insertAtTail(Node* &tail, int d){
     Node* temp = new Node(d);
     tail->next = temp;
     tail = temp;
+}
+
+void deleteNode(int position, Node* &head){
+
 }
 
 void display(Node* &head){
